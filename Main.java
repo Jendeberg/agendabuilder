@@ -6,11 +6,17 @@ import java.util.*;
 import se.kth.csc.iprog.agendabuilder.model.*;
 import se.kth.csc.iprog.agendabuilder.view.*;
 
+/**
+ * The class that starts the AgendaBuilder
+ * 
+ * @author Daniel
+ *
+ */
 public class Main {
 	
 	
 	public static void main(String[] args){
 		AgendaModel model = new AgendaModel();
-		JFrame view = new AddActivity(model);
+		JFrame view = new StartView(model);
 	}
 }
