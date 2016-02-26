@@ -21,7 +21,7 @@ public class StartButtonController implements ActionListener{
 	 * Constructor, starts the actionlistener on the buttons.
 	 * 
 	 */
-	public StartButtonController(StartView view, AgendaModel model){
+	public StartButtonController(AgendaModel model, StartView view){
 		this.view = view;
 		this.model = model;
 		
@@ -36,6 +36,7 @@ public class StartButtonController implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == view.addActivity){
+			System.out.println("Create new Activity");
 			new AddActivity(model);
 		}
 	}
