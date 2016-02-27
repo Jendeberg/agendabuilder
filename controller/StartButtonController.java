@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
+import se.kth.csc.iprog.agendabuilder.view.DetailedPlan;
 import se.kth.csc.iprog.agendabuilder.view.StartView;
 
 /**
@@ -38,6 +39,9 @@ public class StartButtonController implements ActionListener{
 		if(ae.getSource() == view.addActivity){
 			System.out.println("Create new Activity");
 			new AddActivity(model);
+		}else if(ae.getSource() == view.detailedPlan){
+			System.out.println("Show detailed plan");
+			new DetailedPlan();
 		}
 	}
 

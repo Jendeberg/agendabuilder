@@ -19,8 +19,10 @@ public class StartView extends JFrame implements Observer {
 
 	// UI components
 	public JButton addActivity;
-	public JTable temporary;
+	public JButton detailedPlan;
+	public JList temporary;
 	public JTable agenda;
+	
 	
 
 	/**
@@ -39,6 +41,11 @@ public class StartView extends JFrame implements Observer {
 		this.pack();
 		//this.setBounds(0,0,250,300);
 		this.setVisible(true);
+		
+	}
+	
+	
+	private void createAgendaList(){
 		
 	}
 

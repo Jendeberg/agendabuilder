@@ -20,5 +20,6 @@ public class Main {
 		AgendaModel model = new AgendaModel();
 		StartView view = new StartView(model);
 		StartButtonController SBC = new StartButtonController(model,view);
+		
 	}
 }
