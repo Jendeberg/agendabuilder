@@ -27,6 +27,8 @@ public class StartButtonController implements ActionListener{
 		this.model = model;
 		
 		view.addActivity.addActionListener(this);
+		view.detailedPlan.addActionListener(this);
+		view.addDay.addActionListener(this);
 	}
 	
 	/**
@@ -42,6 +44,8 @@ public class StartButtonController implements ActionListener{
 		}else if(ae.getSource() == view.detailedPlan){
 			System.out.println("Show detailed plan");
 			new DetailedPlan();
+		}else if(ae.getSource() == view.addDay){
+			System.out.println("Adding a new Day");
 		}
 	}
 

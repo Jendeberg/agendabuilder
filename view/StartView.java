@@ -15,12 +15,16 @@ import se.kth.csc.iprog.agendabuilder.model.*;
  * 
  */
 public class StartView extends JFrame implements Observer {
+	private final int margin = 10;
 	private AgendaModel model;
 
-	// UI components
+	// private UI components
+	
+	// public UI components
 	public JButton addActivity;
 	public JButton detailedPlan;
-	public JList temporary;
+	public JButton addDay;
+	public JList activities;
 	public JTable agenda;
 	
 	
@@ -32,16 +36,27 @@ public class StartView extends JFrame implements Observer {
 	 */
 	public StartView(AgendaModel model) {
 		this.model = model;
+		this.setLayout(null);
 		
 		addActivity = new JButton("Add Activity");
-		addActivity.setBounds(0,0,300,50);
+		addActivity.setBounds(margin,0,150,50);
 		addActivity.setBackground(Color.GREEN);
 		addActivity.setOpaque(true);
 		this.add(addActivity);
-		this.pack();
-		//this.setBounds(0,0,250,300);
-		this.setVisible(true);
+
 		
+		detailedPlan = new JButton("Show Detailed Plan");
+		detailedPlan.setBounds(margin,375,150,300);
+		this.add(detailedPlan);
+		
+		addDay = new JButton("Add Day");
+		addDay.setBounds(margin,75,150,300);
+		this.add(addDay);
+		
+		
+		
+		this.setBounds(0,0,1600,900);
+		this.setVisible(true);
 	}
 	
 	
