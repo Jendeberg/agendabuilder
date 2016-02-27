@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
+import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
 import se.kth.csc.iprog.agendabuilder.view.DetailedPlan;
 import se.kth.csc.iprog.agendabuilder.view.StartView;
@@ -46,6 +47,7 @@ public class StartButtonController implements ActionListener{
 			new DetailedPlan();
 		}else if(ae.getSource() == view.addDay){
 			System.out.println("Adding a new Day");
+			Day d = model.addDay(8, 0);
 		}
 	}
 

@@ -30,8 +30,6 @@ public class StartView extends JFrame implements Observer {
 	public JButton detailedPlan;
 	public JButton addDay;
 	public JList<Activity> activities;
-	
-	public ArrayList<JList> days;
 
 	/**
 	 * Initalizes the Starting view of the AgendaBuilder.
@@ -40,6 +38,8 @@ public class StartView extends JFrame implements Observer {
 	 */
 	public StartView(AgendaModel model) {
 		this.model = model;
+		this.model.addObserver(this);
+		
 		this.setLayout(null);
 
 		addActivity = new JButton("Add Activity");
@@ -61,11 +61,20 @@ public class StartView extends JFrame implements Observer {
 		JScrollPane parked = new JScrollPane();
 		parked.setBounds(margin, 100, 200, 600);
 		parked.add(activities);
+		parked.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		parked.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		this.add(parked);
 
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.BLACK);
+		panel.setBounds(0, 0, 10000, 10000);
+		dayViewer = new JScrollPane(panel);
 		dayViewer.setBounds(300, 100, 1000, 600);
+		dayViewer.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
+		dayViewer.setWheelScrollingEnabled(true);
 		this.add(dayViewer);
 		
+		this.setTitle("Agenda Builder");
 		this.setBounds(0, 0, 1600, 900);
 		this.setVisible(true);
 	}
@@ -74,12 +83,46 @@ public class StartView extends JFrame implements Observer {
 		activities.setListData((new Vector<Activity>(model.parkedActivites)));
 	}
 
+	/**
+	 * Draws each day on the view.
+	 */
 	private void drawDays() {
-		
+		int i = 1;
+		for(Day day : model.days){
+			JPanel p = new JPanel();
+			p.setLayout(null);
+			p.setBounds(i,0,200,dayViewer.getHeight());
+			p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			
+			// add info on top.
+			JSpinner hour = new JSpinner();
+			
+			JLabel info = new JLabel();
+			
+			JLabel picture = new JLabel();
+			
+			// add ScrollPane with JList of Activities for the day.
+			JScrollPane jsp = new JScrollPane();
+			jsp.setBounds(0,200, p.getWidth(), p.getHeight()-200);
+			jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+			jsp.setWheelScrollingEnabled(true);
+			jsp.setVerticalScrollBar(new JScrollBar());
+			jsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			p.add(jsp);
+			dayViewer.getViewport().add(p);
+			i+=200;
+		}
+		dayViewer.getViewport().updateUI();
+		dayViewer.getViewport().repaint();
+		dayViewer.updateUI();
+		dayViewer.repaint();
 	}
 	
-	private void updateDays() {
-		
+	/**
+	 * Removes the current days from the view.
+	 */
+	private void removeDays(){
+		dayViewer.removeAll();
 	}
 
 	/**
@@ -92,10 +135,9 @@ public class StartView extends JFrame implements Observer {
 	 */
 	public void update(Observable arg0, Object arg1) {
 		String updated = (String) arg1;
-
 		if (updated.equals("AddedDay")) {
-			// The number of days is updated.
-			updateDays();
+			// The number of days is updated.'
+			removeDays();
 			drawDays();
 		} else if (updated.equals("ActivityParked")) {
 			// A new activity was parked.
