@@ -40,7 +40,7 @@ public class StartButtonController implements ActionListener{
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == view.addActivity){
 			System.out.println("Create new Activity");
-			new AddActivity(model);
+			new AddActivityButtonController( model, new AddActivity(model) );
 		}else if(ae.getSource() == view.detailedPlan){
 			System.out.println("Show detailed plan");
 			new DetailedPlan();
