@@ -44,7 +44,7 @@ public class StartButtonController implements ActionListener{
 			new AddActivityButtonController( model, new AddActivity(model) );
 		}else if(ae.getSource() == view.detailedPlan){
 			System.out.println("Show detailed plan");
-			new DetailedPlan();
+			new DetailedPlan(model);
 		}else if(ae.getSource() == view.addDay){
 			System.out.println("Adding a new Day");
 			Day d = model.addDay(8, 0);
