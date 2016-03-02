@@ -8,7 +8,6 @@ import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
 import se.kth.csc.iprog.agendabuilder.view.DetailedPlan;
-import se.kth.csc.iprog.agendabuilder.view.StartView;
 
 /**
  * An ActionListener that listens to the buttons in the start view.

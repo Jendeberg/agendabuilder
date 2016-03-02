@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="787.0" prefWidth="1412.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.kth.csc.iprog.agendabuilder.controller.StartController">
+   <children>
+      <ScrollPane layoutX="224.0" layoutY="144.0" prefHeight="500.0" prefViewportHeight="900.0" prefViewportWidth="1600.0" prefWidth="669.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="555.0" />
+        </content>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ScrollPane>
+      <Button fx:id="addActivity" layoutX="30.0" layoutY="75.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" text="Add Activity" />
+      <ScrollPane layoutX="30.0" layoutY="144.0" prefHeight="500.0" prefWidth="194.0">
+         <content>
+            <ListView prefHeight="357.0" prefWidth="198.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="detailedPlan" layoutX="893.0" layoutY="394.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="264.0" text="Detailed View" />
+      <Button fx:id="addDay" layoutX="893.0" layoutY="144.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="264.0" text="Add Day" />
+   </children>
+</AnchorPane>
