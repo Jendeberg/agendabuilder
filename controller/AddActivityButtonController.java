@@ -7,7 +7,6 @@ import java.awt.event.WindowEvent;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
-import se.kth.csc.iprog.agendabuilder.view.DetailedPlan;
 
 /**
  * An ActionListener that listens to the buttons in the start view.
@@ -42,7 +41,7 @@ public class AddActivityButtonController implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == view.save) {
 			// Save the activity
-			model.addParkedActivity(new Activity(null, null, 0, 0));
+			model.addParkedActivity(new Activity(view.name.getText(), view.description.getText(), Integer.parseInt(view.length.getText()), view.type.getSelectedIndex()));
 		}
 		// Close view.
 		view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
