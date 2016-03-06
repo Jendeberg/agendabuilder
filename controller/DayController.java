@@ -5,7 +5,6 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,9 +27,9 @@ public class DayController implements Initializable, Observer {
 	@FXML
 	private TextField startTime;
 	@FXML
-	private TextField endTime;
+	private Label endTime;
 	@FXML
-	private TextField lengthTime;
+	private Label lengthTime;
 	@FXML
 	private Label colorLabel;
 	@FXML
@@ -42,7 +41,7 @@ public class DayController implements Initializable, Observer {
 	public void update(java.util.Observable o, Object arg) {
 		String s = (String) arg;
 		if (s.equals("StartChanged")) {
-
+			updateTime();
 		} else if (s.equals("ActivityAdded")) {
 			updateActivities();
 		} else if (s.equals("ActivityRemoved")) {
@@ -54,11 +53,13 @@ public class DayController implements Initializable, Observer {
 
 	public void setDay(Day d) {
 		this.day = d;
+		day.addObserver(this);
 		updateActivities();
 	}
 	
-	public void setModel(AgendaModel model){
-		this.model = model;
+	public void setModel(AgendaModel m){
+		this.model = m;
+		model.addObserver(this);
 	}
 	
 	private void updateActivities(){
@@ -68,13 +69,14 @@ public class DayController implements Initializable, Observer {
 	
 
 	private void updateTime() {
-		startTime.setPromptText(day.getStart()/60+ ":" + (day.getStart()%60));
-		//endTime.setDisable(false);
-		//lengthTime.setDisable(false);
-		endTime.setText((day.getEnd()/60) + ":" + (day.getEnd()%60));
+		String seperator = ":";
+		if((day.getStart()%60)<10)
+			seperator += "0";
+		startTime.setPromptText(day.getStart()/60+ seperator + (day.getStart()%60));
+		if(!((day.getEnd()%60)<10))
+			seperator = ":";
+		endTime.setText((day.getEnd()/60) + seperator + (day.getEnd()%60));
 		lengthTime.setText((day.getTotalLength()/60) + ":" + (day.getTotalLength()%60));
-		//endTime.setDisable(true);
-		//lengthTime.setDisable(true);
 	}
 
 	@Override
@@ -121,16 +123,24 @@ public class DayController implements Initializable, Observer {
 	        public void handle(KeyEvent ke)
 	        {
 	            if (ke.getCode().equals(KeyCode.ENTER)){
-	            	System.out.println("Enter");
 	            	String[] slist = startTime.getText().split(":");
 	            	int hour = Integer.parseInt(slist[0]);
 	            	int min = Integer.parseInt(slist[1]);
-	            	if(hour>24){
+	            	if(hour<24){
 	            		day.setStart(hour*60+min);
 	            	}
 	                updateTime();
 	            }
 	        }
 	    });
+		
+		updateColorLabel();
+	}
+
+	private void updateColorLabel() {
+		// TODO 
+		// Fix the coloring of this label and set a red line at 30%.
+		colorLabel.getStyleClass().add("pres");
+		
 	}
 }

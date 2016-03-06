@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +19,6 @@
             <ListView fx:id="activityList" prefHeight="357.0" prefWidth="198.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="detailedPlan" layoutX="893.0" layoutY="244.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="success-btn" text="Detailed View" />
       <Button fx:id="addDay" layoutX="893.0" layoutY="144.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="success-btn" text="Add Day" />
    </children>
 </AnchorPane>

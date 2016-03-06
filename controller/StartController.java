@@ -40,8 +40,6 @@ public class StartController implements Initializable, Observer {
 	@FXML
 	private Button addDay;
 	@FXML
-	private Button detailedPlan;
-	@FXML
 	private ListView<Activity> activityList;
 	@FXML
 	private ScrollPane dayPane;
@@ -59,26 +57,18 @@ public class StartController implements Initializable, Observer {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (addActivity == null || detailedPlan == null || addDay == null) {
+		if (addActivity == null || addDay == null) {
 			System.out.println("buttons not initialized");
 		}
 		addActivity.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Create new Activity");
 				new AddActivity(model);
-			}
-		});
-		detailedPlan.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Show detailed plan");
 			}
 		});
 		addDay.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Adding a new Day");
 				model.addDay(8, 0);
 			}
 		});

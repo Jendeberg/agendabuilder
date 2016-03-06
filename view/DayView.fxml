@@ -12,8 +12,8 @@
       <Label layoutX="29.0" layoutY="53.0" prefHeight="17.0" prefWidth="68.0" text="End Time:" />
       <Label fx:id="colorLabel" layoutX="178.0" layoutY="20.0" prefHeight="100.0" prefWidth="30.0" />
       <TextField fx:id="startTime" layoutX="100.0" layoutY="16.0" prefHeight="25.0" prefWidth="47.0" />
-      <TextField fx:id="endTime" layoutX="100.0" layoutY="49.0" prefHeight="25.0" prefWidth="47.0" />
       <Label layoutX="29.0" layoutY="94.0" prefHeight="17.0" prefWidth="68.0" text="Total length" />
-      <TextField fx:id="lengthTime" layoutX="100.0" layoutY="90.0" prefHeight="25.0" prefWidth="47.0" />
+      <Label fx:id="endTime" layoutX="100.0" layoutY="53.0" prefHeight="17.0" prefWidth="47.0" text="Label" />
+      <Label fx:id="lengthTime" layoutX="100.0" layoutY="94.0" prefHeight="17.0" prefWidth="47.0" text="Label" />
    </children>
 </AnchorPane>
