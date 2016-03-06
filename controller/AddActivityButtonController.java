@@ -42,6 +42,9 @@ public class AddActivityButtonController implements Initializable {
 	 * Constructor, starts the actionlistener on the buttons.
 	 * 
 	 */
+	public AddActivityButtonController(){
+		
+	}
 	public AddActivityButtonController(AgendaModel model) {
 		this.model = model;
 
@@ -67,7 +70,18 @@ public class AddActivityButtonController implements Initializable {
 		save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	// TODO
+            	int typeVal = 0;
+            	switch(type.getValue()){
+            		case "Presentation":typeVal=1;
+            		break;
+            		case "Group Work":typeVal=2;
+            		break;
+            		case "Discussion":typeVal=3;
+            		break;
+            		case "Break":typeVal=4;
+            		break;
+            	}
+            	model.addParkedActivity(new Activity(name.getText(), desc.getText(), Integer.parseInt(length.getText()), typeVal));
             }
         });
 		

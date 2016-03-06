@@ -24,8 +24,8 @@ public class AddActivity{
 	private AgendaModel model;
 	
 	public AddActivity(AgendaModel model){
-		this.stage = stage;
-		this.stage.setTitle("Add Activity");
+		stage = new Stage();
+		stage.setTitle("Add Activity");
 		initLayout();
 
 	}
