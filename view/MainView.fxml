@@ -15,9 +15,6 @@
          </cursor>
       </ScrollPane>
       <Button fx:id="addActivity" layoutX="30.0" layoutY="75.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="success-btn" text="Add Activity" />
-      <Label fx:id="info" layoutX="240.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="194.0" styleClass="info-txt" text="Start time:" />
-      <Label fx:id="info" layoutX="240.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="194.0" styleClass="info-txt" text="End time:" />
-      <Label fx:id="info" layoutX="240.0" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="194.0" styleClass="info-txt" text="Total length:" />
       <ScrollPane layoutX="30.0" layoutY="144.0" prefHeight="650.0" prefWidth="194.0">
          <content>
             <ListView fx:id="activityList" prefHeight="357.0" prefWidth="198.0" />
