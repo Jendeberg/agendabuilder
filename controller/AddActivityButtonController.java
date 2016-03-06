@@ -4,14 +4,18 @@ import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
@@ -43,15 +47,16 @@ public class AddActivityButtonController implements Initializable {
 	 * 
 	 */
 	public AddActivityButtonController(){
-		
+		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
 	public AddActivityButtonController(AgendaModel model) {
 		this.model = model;
-
+		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
 	
 	public void setModel(AgendaModel model){
 		this.model = model;
+		ObservableList<String> listItems = FXCollections.observableArrayList();
 	}
 
 	/**
@@ -82,8 +87,21 @@ public class AddActivityButtonController implements Initializable {
             		break;
             	}
             	model.addParkedActivity(new Activity(name.getText(), desc.getText(), Integer.parseInt(length.getText()), typeVal));
+            	Node  source = (Node)  event.getSource(); 
+                Stage stage  = (Stage) source.getScene().getWindow();
+                stage.close();
             }
         });
+		cancel.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+            	Node  source = (Node)  event.getSource(); 
+                Stage stage  = (Stage) source.getScene().getWindow();
+                stage.close();
+			}
+			
+		});
 		
 	}
 }

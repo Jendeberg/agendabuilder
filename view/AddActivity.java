@@ -34,7 +34,7 @@ public class AddActivity{
 		try{
 			this.model = new AgendaModel();
 			FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/AddActivity.fxml"));
+	        loader.setLocation(MainApp.class.getResource("AddActivity.fxml"));
 	        layout = (AnchorPane) loader.load();
 	        AddActivityButtonController controller = loader.<AddActivityButtonController>getController();
 	        controller.setModel(model);
