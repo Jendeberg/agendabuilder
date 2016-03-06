@@ -1,0 +1,16 @@
+.main{
+	 -fx-background-color: #f1f1f1;
+}
+
+.success-btn{
+	-fx-background-color: #51a351;
+}
+
+.success-btn:hover{
+	-fx-background-color: #80C380;
+	
+}
+
+.error-btn{
+	-fx-background-color: red;
+}

@@ -23,7 +23,6 @@ public class StartView extends Application{
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
 		this.stage.setTitle("Agenda Builder");
-		
 		initLayout();
 	}
 	
@@ -35,6 +34,7 @@ public class StartView extends Application{
 
         // Show the scene containing the root layout.
         Scene scene = new Scene(layout);
+        scene.getStylesheets().add("resources/css/style.css");
         stage.setScene(scene);
         stage.show();
 		}catch (IOException e){
