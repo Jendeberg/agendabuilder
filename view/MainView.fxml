@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="787.0" prefWidth="1412.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.kth.csc.iprog.agendabuilder.controller.StartController" styleClass="main">
    <children>
-      <ScrollPane layoutX="224.0" layoutY="144.0" prefHeight="500.0" prefViewportHeight="900.0" prefViewportWidth="1600.0" prefWidth="400.0" styleClass="middle">
+      <ScrollPane fx:id="dayPane" layoutX="224.0" layoutY="144.0" prefHeight="500.0" prefViewportHeight="900.0" prefViewportWidth="1600.0" prefWidth="400.0" styleClass="middle">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="555.0" />
         </content>

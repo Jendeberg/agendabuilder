@@ -15,7 +15,6 @@ public class AgendaModel extends Observable {
 	public Day addDay(int startHour, int startMin) {
 		Day d = new Day(startHour, startMin);
 		days.add(d);
-		System.out.println("adadadada");
 		setChanged();
 		notifyObservers("AddedDay");
 		return d;
@@ -69,7 +68,7 @@ public class AgendaModel extends Observable {
 			newday.addActivity(activity,newposition);
 		}
 		setChanged();
-		notifyObservers();
+		notifyObservers("ActivityMoved");
 	};
 	
 	/**
