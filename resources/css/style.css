@@ -14,3 +14,17 @@
 .error-btn{
 	-fx-background-color: red;
 }
+
+.error-btn:hover{
+	-fx-background-color:  #f39c12;
+	
+}
+
+.middle{
+	-fx-color: #ffffff;
+}
+
+.info-txt{
+	-fx-font-size: 1.5em;
+	-fx-font-weight: bold;
+}
