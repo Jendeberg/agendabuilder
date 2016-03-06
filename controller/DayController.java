@@ -8,9 +8,12 @@ import java.util.ResourceBundle;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -32,6 +35,8 @@ public class DayController implements Initializable, Observer {
 	private Label colorLabel;
 	@FXML
 	private ListView<String> list;
+	@FXML 
+	private Button removeButton;
 
 	@Override
 	public void update(java.util.Observable o, Object arg) {
@@ -65,7 +70,12 @@ public class DayController implements Initializable, Observer {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		removeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	
+            }
+        });
 
 	}
 }

@@ -47,11 +47,9 @@ public class AddActivityButtonController implements Initializable {
 	 * 
 	 */
 	public AddActivityButtonController(){
-		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
 	public AddActivityButtonController(AgendaModel model) {
 		this.model = model;
-		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
 	
 	public void setModel(AgendaModel model){
@@ -103,5 +101,6 @@ public class AddActivityButtonController implements Initializable {
 			
 		});
 		
+		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
 }
