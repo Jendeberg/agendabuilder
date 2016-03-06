@@ -60,5 +60,9 @@ public class Activity extends Observable {
 		notifyObservers("TypeChanged");
 	}
 	
+	public String toString(){
+		return name;
+	}
+	
 
 }

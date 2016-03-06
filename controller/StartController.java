@@ -1,6 +1,7 @@
 package se.kth.csc.iprog.agendabuilder.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,6 +9,8 @@ import java.util.ResourceBundle;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -87,7 +90,12 @@ public class StartController implements Initializable,Observer {
 	public void update(Observable o, Object arg) {
 		String s = (String) arg;
 		if(s.equals("ActivityParked")){
-			activityList = (ListView<String>) model.parkedActivites;
+			activityList = new ListView<String>();
+			ObservableList<String> listItems = FXCollections.observableArrayList("Add Items here");
+			for(Activity act : model.parkedActivites){
+				listItems.add(act.toString());
+			}
+			activityList.setItems(listItems);
 		} 
 		
 	}
