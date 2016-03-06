@@ -11,7 +11,7 @@ public class Day extends Observable {
 	 */
 	int start;
 	
-	List<Activity> activities = new ArrayList<Activity>();
+	public List<Activity> activities = new ArrayList<Activity>();
 	
 	public Day(int hour, int min) {
 		start = hour*60 + min;
