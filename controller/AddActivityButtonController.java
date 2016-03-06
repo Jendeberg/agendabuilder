@@ -1,6 +1,5 @@
 package se.kth.csc.iprog.agendabuilder.controller;
 
-import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,12 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
-import se.kth.csc.iprog.agendabuilder.view.AddActivity;
 
 /**
  * An ActionListener that listens to the buttons in the start view.
@@ -54,7 +51,6 @@ public class AddActivityButtonController implements Initializable {
 	
 	public void setModel(AgendaModel model){
 		this.model = model;
-		ObservableList<String> listItems = FXCollections.observableArrayList();
 	}
 
 	/**
