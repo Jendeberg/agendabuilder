@@ -35,7 +35,6 @@ public class StartController implements Initializable {
 	}
 	
 	/**
-	 * Constructor, starts the actionlistener on the buttons.
 	 * 
 	 */
 	public StartController(AgendaModel model){
