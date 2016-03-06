@@ -26,13 +26,13 @@ public class AddActivity{
 	public AddActivity(AgendaModel model){
 		stage = new Stage();
 		stage.setTitle("Add Activity");
+		this.model = model;
 		initLayout();
 
 	}
 	
 	private void initLayout(){
 		try{
-			this.model = new AgendaModel();
 			FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(MainApp.class.getResource("AddActivity.fxml"));
 	        layout = (AnchorPane) loader.load();
