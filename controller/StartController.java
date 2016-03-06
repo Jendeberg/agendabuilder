@@ -1,6 +1,9 @@
 package se.kth.csc.iprog.agendabuilder.controller;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javafx.event.Event;
@@ -9,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
@@ -20,7 +25,7 @@ import se.kth.csc.iprog.agendabuilder.view.DetailedPlan;
  * @author Daniel
  *
  */
-public class StartController implements Initializable {
+public class StartController implements Initializable,Observer {
 	private AgendaModel model;
 	
 	@FXML
@@ -29,6 +34,8 @@ public class StartController implements Initializable {
 	private Button addDay;
 	@FXML
 	private Button detailedPlan;
+	@FXML
+	private ListView<String> activityList;
 	
 	public StartController(){
 		
@@ -74,5 +81,14 @@ public class StartController implements Initializable {
 	 */
 	public void setModel(AgendaModel model){
 		this.model = model;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		String s = (String) arg;
+		if(s.equals("ActivityParked")){
+			List<Activity> pLst = model.parkedActivites;
+		} 
+		
 	}
 }
