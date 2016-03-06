@@ -18,14 +18,6 @@
       <Button fx:id="cancel" layoutX="239.0" layoutY="531.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="error-btn" text="Cancel" />
       <Button fx:id="save" layoutX="26.0" layoutY="531.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="success-btn" text="Save" />
       <ChoiceBox fx:id="type" layoutX="23.0" layoutY="250.0" prefHeight="49.0" prefWidth="407.0" />
-      	<items>
-      		<FXCollections fx:factory="observableArrayList">
-	            <String fx:value="Presentation" />
-	            <String fx:value="Group Work" />
-	            <String fx:value="Discussion" />
-	            <String fx:value="Break" />
-       		</FXCollections>
-      	</items>
       <TextField fx:id="desc" layoutX="23.0" layoutY="350.0" prefHeight="167.0" prefWidth="407.0" promptText="Description"/>
       <Label layoutX="23.0" layoutY="135.0" prefHeight="17.0" prefWidth="65.0" text="Length">
          <font>
