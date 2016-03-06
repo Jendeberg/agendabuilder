@@ -1,11 +1,10 @@
 package se.kth.csc.iprog.agendabuilder.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +22,7 @@ import se.kth.csc.iprog.agendabuilder.view.AddActivity;
  * @author Daniel
  *
  */
-public class AddActivityButtonController implements ActionListener, Initializable {
+public class AddActivityButtonController implements Initializable {
 	private AgendaModel model;
 		
 	@FXML
@@ -65,15 +64,12 @@ public class AddActivityButtonController implements ActionListener, Initializabl
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		save.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		}
+		save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	// TODO
+            }
+        });
 		
 	}
 }
