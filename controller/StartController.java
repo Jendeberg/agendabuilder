@@ -84,6 +84,7 @@ public class StartController implements Initializable,Observer {
 	 */
 	public void setModel(AgendaModel model){
 		this.model = model;
+		this.model.addObserver(this);
 	}
 
 	@Override
@@ -91,10 +92,12 @@ public class StartController implements Initializable,Observer {
 		String s = (String) arg;
 		if(s.equals("ActivityParked")){
 			activityList = new ListView<String>();
-			ObservableList<String> listItems = FXCollections.observableArrayList("Add Items here");
+			ObservableList<String> listItems = FXCollections.observableArrayList();
 			for(Activity act : model.parkedActivites){
 				listItems.add(act.toString());
+				System.out.println(act.toString());
 			}
+			activityList.setItems(null);
 			activityList.setItems(listItems);
 		} 
 		

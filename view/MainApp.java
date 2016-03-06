@@ -31,7 +31,7 @@ public class MainApp extends Application{
 		try{
 		this.model = new AgendaModel();
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("MainView.fxml"));
+        loader.setLocation(MainApp.class.getResource("/view/MainView.fxml"));
         layout = (AnchorPane) loader.load();
         StartController controller = loader.<StartController>getController();
         controller.setModel(model);
