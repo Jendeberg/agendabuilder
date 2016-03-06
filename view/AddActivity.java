@@ -1,8 +1,14 @@
 package se.kth.csc.iprog.agendabuilder.view;
 
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import se.kth.csc.iprog.agendabuilder.controller.StartController;
 import se.kth.csc.iprog.agendabuilder.model.*;
 import se.kth.csc.iprog.agendabuilder.util.*;
 
@@ -11,57 +17,48 @@ import se.kth.csc.iprog.agendabuilder.util.*;
  * @author Daniel
  *
  */
-public class AddActivity extends JFrame{
-	private final int x = 10;
-	private final int height = 25;
-	private final int width = 200;
-	
+public class AddActivity{
+	private Stage stage;
+	private AnchorPane layout;
 	private AgendaModel model;
-	public JTextField name = new JTextField();
-	public JTextField length = new JTextField();
-	public JComboBox type;
-	public JTextArea description = new JTextArea();
-	public JButton cancel = new JButton();
-	public JButton save = new JButton();
 	
 	public AddActivity(AgendaModel model){
-		this.model =  model;
-		this.setLayout(null);
-		this.setTitle("Add Activity");
+		this.stage = stage;
+		this.stage.setTitle("Add Activity");
+		initLayout();
+		
 		
 		//name
-		name.setBounds(x, x, width, height);
-		this.add(name);
 		
 		//length
-		length.setBounds(x, 2*x+height, width/2, height);
-		this.add(length);
-		JLabel mins = new JLabel();
-		mins.setBounds(2*x+(width/2), (2*x+height), width/2, height);
-		mins.setText("min");
-		this.add(mins);
 		
 		//type
-		String[] types = {"Presentation", "Discussion", "Group Work", "Break"};
-		type = new JComboBox(types);
-		type.setBounds(x, 3*x+2*height, width, height);
-		this.add(type);
+		//String[] types = {"Presentation", "Discussion", "Group Work", "Break"};
+
 		
 		//Description
-		description.setBounds(x, 4*x+3*height, width, 4*height);
-		this.add(description);
 		
 		//Buttons
-		cancel.setBounds(x, 225, width/2, height);
-		cancel.setText("Cancel");
-		this.add(cancel);
-		save.setBounds(x+(width/2), 225, width/2, height);
-		save.setText("Save");
-		this.add(save);
-		
-		this.pack();
-		this.setBounds(0,0,250,300);
-		this.setVisible(true);
+	}
+	
+	private void initLayout(){
+		try{
+		this.model = new AgendaModel();
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("/view/AddActivity.fxml"));
+        layout = (AnchorPane) loader.load();
+        StartController controller = loader.<AddActivityButtonController>getController();
+        controller.setModel(model);
+
+        // Show the scene containing the root layout.
+        Scene scene = new Scene(layout);
+        scene.getStylesheets().add("/resources/css/style.css");
+        stage.setScene(scene);
+        stage.show();
+		}catch (IOException e){
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	

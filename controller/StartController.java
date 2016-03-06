@@ -91,7 +91,6 @@ public class StartController implements Initializable,Observer {
 	public void update(Observable o, Object arg) {
 		String s = (String) arg;
 		if(s.equals("ActivityParked")){
-			activityList = new ListView<String>();
 			ObservableList<String> listItems = FXCollections.observableArrayList();
 			for(Activity act : model.parkedActivites){
 				listItems.add(act.toString());

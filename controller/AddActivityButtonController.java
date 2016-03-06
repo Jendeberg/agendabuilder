@@ -26,8 +26,10 @@ public class AddActivityButtonController implements ActionListener {
 		this.view = view;
 		this.model = model;
 
-		view.cancel.addActionListener(this);
-		view.save.addActionListener(this);
+	}
+	
+	public void setModel(AgendaModel model){
+		this.model = model;
 	}
 
 	/**
@@ -39,11 +41,5 @@ public class AddActivityButtonController implements ActionListener {
 	 * 
 	 */
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == view.save) {
-			// Save the activity
-			model.addParkedActivity(new Activity(view.name.getText(), view.description.getText(), Integer.parseInt(view.length.getText()), view.type.getSelectedIndex()));
-		}
-		// Close view.
-		view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 	}
 }
