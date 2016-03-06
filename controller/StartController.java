@@ -60,7 +60,7 @@ public class StartController implements Initializable,Observer {
             @Override
             public void handle(ActionEvent event) {
             	System.out.println("Create new Activity");
-            	new AddActivityButtonController(model, new AddActivity(model));
+            	new AddActivity(model);
             }
         });
 		detailedPlan.setOnAction(new EventHandler<ActionEvent>() {
