@@ -87,7 +87,7 @@ public class StartController implements Initializable,Observer {
 	public void update(Observable o, Object arg) {
 		String s = (String) arg;
 		if(s.equals("ActivityParked")){
-			List<Activity> pLst = model.parkedActivites;
+			activityList = (ListView<String>) model.parkedActivites;
 		} 
 		
 	}
