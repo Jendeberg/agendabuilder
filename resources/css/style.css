@@ -28,3 +28,19 @@
 	-fx-font-size: 1.5em;
 	-fx-font-weight: bold;
 }
+
+.pres{
+	-fx-background-color:  #ADD8E6;
+}
+
+.gw{
+	-fx-background-color: #80C380;
+}
+
+.disc{
+	-fx-background-color: #f39c12;
+}
+
+.brk{
+	-fx-background-color: #3d3d3d;
+}
