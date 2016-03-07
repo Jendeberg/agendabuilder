@@ -53,11 +53,7 @@ public class DayController implements Initializable, Observer {
 		String s = (String) arg;
 		if (s.equals("StartChanged")) {
 			updateTime();
-		} else if (s.equals("ActivityAdded")) {
-			updateActivities();
-		} else if (s.equals("ActivityRemoved")) {
-			updateActivities();
-		} else if (s.equals("ActivityMoved")) {
+		} else if (s.equals("ActivityAdded") || s.equals("ActivityRemoved") || s.equals("ActivityMoved")){
 			updateActivities();
 		}
 	}
@@ -76,6 +72,7 @@ public class DayController implements Initializable, Observer {
 	private void updateActivities() {
 		list.setItems(FXCollections.observableArrayList(day.activities));
 		updateTime();
+		updateColorLabel();
 	}
 
 	private void updateTime() {
@@ -121,8 +118,6 @@ public class DayController implements Initializable, Observer {
 				}
 			}
 		});
-
-		updateColorLabel();
 
 		// **********************************
 		/* Drag and drop specific methods */
@@ -295,9 +290,36 @@ public class DayController implements Initializable, Observer {
 	}
 
 	private void updateColorLabel() {
-		// TODO
-		// Fix the coloring of this label and set a red line at 30%.
-		colorLabel.getStyleClass().add("pres");
-
+		if(day.getTotalLength() == 0){
+			colorLabel.setStyle("-fx-border-color:red; -fx-background-color: beige;");
+			return;
+		}
+		/*Label pres = new Label();
+		pres.getStyleClass().add("pres");
+		pres.setPrefWidth(colorLabel.getWidth());
+		pres.setPrefHeight((day.getLengthByType(Activity.PRESENTATION)*100/day.getTotalLength()));
+		
+		Label gw = new Label();
+		gw.getStyleClass().add("gw");
+		gw.setPrefWidth(colorLabel.getWidth());
+		gw.setPrefHeight((day.getLengthByType(Activity.GROUP_WORK)*100/day.getTotalLength()));
+		gw.setLayoutY(pres.getPrefHeight());
+		
+		Label disc = new Label();
+		disc.getStyleClass().add("disc");
+		disc.setPrefWidth(colorLabel.getWidth());
+		disc.setPrefHeight((day.getLengthByType(Activity.DISCUSSION)*100/day.getTotalLength()));
+		disc.setLayoutY(pres.getPrefHeight()+gw.getPrefHeight());
+		
+		Label brk = new Label();
+		brk.getStyleClass().add("brk");
+		brk.setPrefWidth(colorLabel.getWidth());
+		brk.setPrefHeight((day.getLengthByType(Activity.BREAK)*100/day.getTotalLength()));
+		brk.setLayoutY(pres.getPrefHeight()+gw.getPrefHeight()+disc.getPrefHeight());
+		
+		colorLabel.getChildrenUnmodifiable().add(pres);
+		colorLabel.getChildrenUnmodifiable().add(gw);
+		colorLabel.getChildrenUnmodifiable().add(disc);
+		colorLabel.getChildrenUnmodifiable().add(brk);*/
 	}
 }
