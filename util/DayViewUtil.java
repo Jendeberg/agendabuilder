@@ -5,12 +5,13 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import se.kth.csc.iprog.agendabuilder.controller.DayController;
+import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.view.MainApp;
 
 public class DayViewUtil {
 	
-	public static AnchorPane createDayView(Day day) throws IOException{
+	public static AnchorPane createDayView(Day day, AgendaModel model) throws IOException{
 		AnchorPane dayView = null;
 		
 		FXMLLoader loader = new FXMLLoader();
@@ -18,6 +19,7 @@ public class DayViewUtil {
         dayView = (AnchorPane) loader.load();
         DayController controller = loader.<DayController>getController();
         controller.setDay(day);
+        controller.setModel(model);
         
 		return dayView;
 	}

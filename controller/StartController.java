@@ -3,6 +3,7 @@ package se.kth.csc.iprog.agendabuilder.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -17,6 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
@@ -24,6 +31,7 @@ import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.util.DayViewUtil;
+import se.kth.csc.iprog.agendabuilder.util.ListCellX;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
 
 /**
@@ -33,6 +41,8 @@ import se.kth.csc.iprog.agendabuilder.view.AddActivity;
  *
  */
 public class StartController implements Initializable, Observer {
+	public static final DataFormat ACTIVITY_FORMAT = new DataFormat("Activity.custom");
+	
 	private AgendaModel model;
 
 	@FXML
@@ -74,36 +84,59 @@ public class StartController implements Initializable, Observer {
 		});
 
 		activityList.setCellFactory(new Callback<ListView<Activity>, ListCell<Activity>>() {
+				@Override
+			    public ListCell<Activity> call(ListView<Activity> arg0) {
+			        //My cell is on my way to call
+			        ListCell<Activity> cell = new ListCell<Activity>(){
+			            @Override
+			            public void updateItem(Activity act, boolean empty){
+			                super.updateItem(act,empty);
+			                if(act!=null){   
+			                	if (act != null) {
+									setText(act.toString());
+									switch (act.getType()) {
+									case Activity.PRESENTATION:
+										getStyleClass().add("pres");
+										break;
+									case Activity.GROUP_WORK:
+										getStyleClass().add("gw");
+										break;
+									case Activity.DISCUSSION:
+										getStyleClass().add("disc");
+										break;
+									case Activity.BREAK:
+										getStyleClass().add("brk");
+										break;
+									}
+								}
+			                }
+			            }
+			        };
+			        cell.setOnDragDetected(new EventHandler<MouseEvent>() {
+					    public void handle(MouseEvent event) {
+					        /* drag was detected, start a drag-and-drop gesture*/
+					        /* allow any transfer mode */
+					        Dragboard db = activityList.startDragAndDrop(TransferMode.ANY);
+					        
+					        /* Put a string on a dragboard */
+					        ClipboardContent content = new ClipboardContent();
+					        content.putString("parkedActivity");
+					        content.put(ACTIVITY_FORMAT, cell.getItem());
+					        db.setContent(content);
+					        
+					        event.consume();
+					    }
+					});
+			        
+			        cell.setOnDragDone(new EventHandler<DragEvent>() {
+			            public void handle(DragEvent event) {
 
-			@Override
-			public ListCell<Activity> call(ListView<Activity> p) {
-
-				ListCell<Activity> cell = new ListCell<Activity>() {
-
-					@Override
-					protected void updateItem(Activity act, boolean bln) {
-						super.updateItem(act, bln);
-						if (act != null) {
-							setText(act.toString());
-							switch (act.getType()) {
-							case Activity.PRESENTATION:
-								getStyleClass().add("pres");
-								break;
-							case Activity.GROUP_WORK:
-								getStyleClass().add("gw");
-								break;
-							case Activity.DISCUSSION:
-								getStyleClass().add("disc");
-								break;
-							case Activity.BREAK:
-								getStyleClass().add("brk");
-								break;
-							}
-						}
-					}
-				};
-				return cell;
-			}
+			                event.consume();
+			            }
+			        });
+			        
+			        return cell;
+			    }
 		});
 	}
 
@@ -127,7 +160,7 @@ public class StartController implements Initializable, Observer {
 		int i = 0;
 		for (Day d : model.days) {
 			try {
-				AnchorPane dayView = DayViewUtil.createDayView(d);
+				AnchorPane dayView = DayViewUtil.createDayView(d, model);
 				dayView.setLayoutX(i);
 				i += dayView.getPrefWidth();
 				p.getChildren().add(dayView);
@@ -141,11 +174,14 @@ public class StartController implements Initializable, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		String s = (String) arg;
-		if (s.equals("ActivityParked")) {
+		if (s.equals("ActivityParked") || s.equals("ParkedActivityRemoved")) {
+			activityList.getSelectionModel().clearSelection();
+			activityList.getItems().clear();
+			List<Activity> selectedItemsCopy = new ArrayList<Activity>(activityList.getSelectionModel().getSelectedItems());
+			activityList.getItems().removeAll(selectedItemsCopy);
 			ObservableList<Activity> listItems = FXCollections.observableArrayList();
 			for (Activity act : model.parkedActivites) {
 				listItems.add(act);
-				System.out.println(act.toString());
 			}
 			activityList.setItems(null);
 			activityList.setItems(listItems);

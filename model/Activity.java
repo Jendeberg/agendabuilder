@@ -1,10 +1,15 @@
 package se.kth.csc.iprog.agendabuilder.model;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class Activity extends Observable {
+public class Activity extends Observable implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// The possible types of the activity
 	public static final int PRESENTATION = 1;
 	public static final int GROUP_WORK = 2;
