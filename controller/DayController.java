@@ -24,6 +24,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
@@ -47,7 +48,16 @@ public class DayController implements Initializable, Observer {
 	private ListView<Activity> list;
 	@FXML
 	private Button removeButton;
-
+	@FXML
+	private Pane presPercent;
+	@FXML
+	private Pane discPercent;
+	@FXML
+	private Pane groupWorkPercent;
+	@FXML
+	private Pane breakPercent;
+	
+	
 	@Override
 	public void update(java.util.Observable o, Object arg) {
 		String s = (String) arg;
@@ -291,35 +301,23 @@ public class DayController implements Initializable, Observer {
 
 	private void updateColorLabel() {
 		if(day.getTotalLength() == 0){
-			colorLabel.setStyle("-fx-border-color:red; -fx-background-color: beige;");
+			presPercent.setPrefHeight(0.0);
+			discPercent.setPrefHeight(0.0);
+			groupWorkPercent.setPrefHeight(0.0);
+			breakPercent.setPrefHeight(0.0);
 			return;
 		}
-		/*Label pres = new Label();
-		pres.getStyleClass().add("pres");
-		pres.setPrefWidth(colorLabel.getWidth());
-		pres.setPrefHeight((day.getLengthByType(Activity.PRESENTATION)*100/day.getTotalLength()));
 		
-		Label gw = new Label();
-		gw.getStyleClass().add("gw");
-		gw.setPrefWidth(colorLabel.getWidth());
-		gw.setPrefHeight((day.getLengthByType(Activity.GROUP_WORK)*100/day.getTotalLength()));
-		gw.setLayoutY(pres.getPrefHeight());
-		
-		Label disc = new Label();
-		disc.getStyleClass().add("disc");
-		disc.setPrefWidth(colorLabel.getWidth());
-		disc.setPrefHeight((day.getLengthByType(Activity.DISCUSSION)*100/day.getTotalLength()));
-		disc.setLayoutY(pres.getPrefHeight()+gw.getPrefHeight());
-		
-		Label brk = new Label();
-		brk.getStyleClass().add("brk");
-		brk.setPrefWidth(colorLabel.getWidth());
-		brk.setPrefHeight((day.getLengthByType(Activity.BREAK)*100/day.getTotalLength()));
-		brk.setLayoutY(pres.getPrefHeight()+gw.getPrefHeight()+disc.getPrefHeight());
-		
-		colorLabel.getChildrenUnmodifiable().add(pres);
-		colorLabel.getChildrenUnmodifiable().add(gw);
-		colorLabel.getChildrenUnmodifiable().add(disc);
-		colorLabel.getChildrenUnmodifiable().add(brk);*/
+		presPercent.setPrefHeight((day.getLengthByType(Activity.PRESENTATION)*100/day.getTotalLength()));
+		presPercent.setLayoutY(16.0); // 16.0 is start height
+
+		discPercent.setPrefHeight((day.getLengthByType(Activity.DISCUSSION)*100/day.getTotalLength()));
+		discPercent.setLayoutY(16.0+presPercent.getPrefHeight());
+
+		groupWorkPercent.setPrefHeight((day.getLengthByType(Activity.GROUP_WORK)*100/day.getTotalLength()));
+		groupWorkPercent.setLayoutY(16.0+presPercent.getPrefHeight()+discPercent.getPrefHeight());
+
+		breakPercent.setPrefHeight((day.getLengthByType(Activity.BREAK)*100/day.getTotalLength()));
+		breakPercent.setLayoutY(16.0+presPercent.getPrefHeight()+discPercent.getPrefHeight()+groupWorkPercent.getPrefHeight());
 	}
 }

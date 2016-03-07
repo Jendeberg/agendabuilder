@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="257.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.kth.csc.iprog.agendabuilder.controller.DayController">
    <children>
@@ -15,5 +16,9 @@
       <Label layoutX="29.0" layoutY="94.0" prefHeight="17.0" prefWidth="68.0" text="Total length" />
       <Label fx:id="endTime" layoutX="100.0" layoutY="53.0" prefHeight="17.0" prefWidth="47.0" text="Label" />
       <Label fx:id="lengthTime" layoutX="100.0" layoutY="94.0" prefHeight="17.0" prefWidth="47.0" text="Label" />
+      <Pane fx:id="presPercent" layoutX="178.0" layoutY="16.0" prefHeight="25.0" prefWidth="47.0" styleClass="pres" />
+      <Pane fx:id="discPercent" layoutX="178.0" layoutY="41.0" prefHeight="25.0" prefWidth="47.0" styleClass="disc" />
+      <Pane fx:id="groupWorkPercent" layoutX="178.0" layoutY="66.0" prefHeight="25.0" prefWidth="47.0" styleClass="gw" />
+      <Pane fx:id="breakPercent" layoutX="178.0" layoutY="90.0" prefHeight="25.0" prefWidth="47.0" styleClass="brk" />
    </children>
 </AnchorPane>
