@@ -106,14 +106,6 @@ public class DayController implements Initializable, Observer {
 		endTime.setDisable(true);
 		lengthTime.setDisable(true);
 
-		list.setCellFactory(new Callback<ListView<Activity>, ListCell<Activity>>() {
-
-			@Override
-			public ListCell<Activity> call(ListView<Activity> p) {
-				return new ListCellX<Activity>();
-			}
-		});
-
 		startTime.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent ke) {

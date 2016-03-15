@@ -109,6 +109,9 @@ public class StartController implements Initializable, Observer {
 										break;
 									}
 								}
+			                }else{
+			                	setText(null);
+			                	getStyleClass().removeAll(getStyleClass());
 			                }
 			            }
 			        };
@@ -130,10 +133,39 @@ public class StartController implements Initializable, Observer {
 			        
 			        cell.setOnDragDone(new EventHandler<DragEvent>() {
 			            public void handle(DragEvent event) {
-
 			                event.consume();
 			            }
 			        });
+			        
+			        cell.setOnDragDropped(new EventHandler<DragEvent>() {
+						public void handle(DragEvent event) {
+							/* data dropped */
+							/* if there is a string data on dragboard, read it and use it */
+							Dragboard db = event.getDragboard();
+							boolean success = false;
+							if(db.hasString() && db.getString().equals("Day")){
+								Activity act = (Activity) db.getContent(StartController.ACTIVITY_FORMAT);
+								Day oldDay = null;
+								int oldIndex = 0;
+								for(Day d : model.days){
+									for(Activity a : d.activities){
+										if(a.getName().equals(act.getName())){
+											oldDay = d;
+											oldIndex = d.activities.indexOf(a);
+											break;
+										}
+									}
+								}
+								if(oldDay != null){
+									model.moveActivity(oldDay, oldIndex, null, 0);
+									success = true;
+								}
+							}
+							event.setDropCompleted(success);
+
+							event.consume();
+						}
+					});
 			        
 			        return cell;
 			    }
@@ -175,16 +207,7 @@ public class StartController implements Initializable, Observer {
 	public void update(Observable o, Object arg) {
 		String s = (String) arg;
 		if (s.equals("ActivityParked") || s.equals("ParkedActivityRemoved")) {
-			activityList.getSelectionModel().clearSelection();
-			activityList.getItems().clear();
-			List<Activity> selectedItemsCopy = new ArrayList<Activity>(activityList.getSelectionModel().getSelectedItems());
-			activityList.getItems().removeAll(selectedItemsCopy);
-			ObservableList<Activity> listItems = FXCollections.observableArrayList();
-			for (Activity act : model.parkedActivites) {
-				listItems.add(act);
-			}
-			activityList.setItems(null);
-			activityList.setItems(listItems);
+			activityList.setItems(FXCollections.observableArrayList(model.parkedActivites));
 		} else if (s.equals("AddedDay") || s.equals("ActivityAddedToDay") || s.equals("ActivityMoved")) {
 			updateDayPane();
 		}
