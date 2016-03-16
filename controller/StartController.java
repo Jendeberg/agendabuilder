@@ -33,6 +33,7 @@ import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.util.DayViewUtil;
 import se.kth.csc.iprog.agendabuilder.util.ListCellX;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
+import se.kth.csc.iprog.agendabuilder.view.EditActivity;
 
 /**
  * An ActionListener that listens to the buttons in the start view.
@@ -67,7 +68,8 @@ public class StartController implements Initializable, Observer {
 	
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
 	@FXML public void updateAct(MouseEvent arg0){
-	    System.out.println("clicked on " + activityList.getSelectionModel().getSelectedItem());
+		Activity activity = activityList.getSelectionModel().getSelectedItem();
+		new EditActivity(model, activity);
 	}
 
 	@Override
