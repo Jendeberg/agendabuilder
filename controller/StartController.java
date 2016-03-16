@@ -64,6 +64,11 @@ public class StartController implements Initializable, Observer {
 	public StartController(AgendaModel model) {
 		this.model = model;
 	}
+	
+	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
+	@FXML public void updateAct(MouseEvent arg0){
+	    System.out.println("clicked on " + activityList.getSelectionModel().getSelectedItem());
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
