@@ -31,7 +31,6 @@ import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.util.DayViewUtil;
-import se.kth.csc.iprog.agendabuilder.util.ListCellX;
 import se.kth.csc.iprog.agendabuilder.view.AddActivity;
 import se.kth.csc.iprog.agendabuilder.view.EditActivity;
 
@@ -94,7 +93,7 @@ public class StartController implements Initializable, Observer {
 				@Override
 			    public ListCell<Activity> call(ListView<Activity> arg0) {
 			        //My cell is on my way to call
-			        ListCell<Activity> cell = new ListCell<Activity>(){
+			        final ListCell<Activity> cell = new ListCell<Activity>(){
 			            @Override
 			            public void updateItem(Activity act, boolean empty){
 			                super.updateItem(act,empty);

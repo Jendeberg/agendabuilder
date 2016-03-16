@@ -57,6 +57,7 @@ public class EditActivityController implements Initializable {
 	
 	public void setActivity(Activity activity){
 		this.activity = activity;
+		updateWindow();
 	}
 
 	/**
@@ -72,11 +73,17 @@ public class EditActivityController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
+	}
+
+	public void updateWindow(){
 		System.out.println(activity.getDescription());
 		length.setText(Integer.toString(activity.getLength()));
 		desc.setText(activity.getDescription());
 		name.setText(activity.getName());
 		type.getSelectionModel().select(activity.getType());
+		
 		
 		save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -92,6 +99,10 @@ public class EditActivityController implements Initializable {
             		case "Break":typeVal=4;
             		break;
             	}
+            	for(int i = 0; i<model.parkedActivites.size(); i++)
+            		if(model.parkedActivites.get(i).equals(activity)){
+            			model.removeParkedActivity(i);
+            		}
             	model.addParkedActivity(new Activity(name.getText(), desc.getText(), Integer.parseInt(length.getText()), typeVal));
             	Node  source = (Node)  event.getSource(); 
                 Stage stage  = (Stage) source.getScene().getWindow();
@@ -102,6 +113,10 @@ public class EditActivityController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
+				for(int i = 0; i<model.parkedActivites.size(); i++)
+            		if(model.parkedActivites.get(i).equals(activity)){
+            			model.removeParkedActivity(i);
+            		}
             	Node  source = (Node)  event.getSource(); 
                 Stage stage  = (Stage) source.getScene().getWindow();
                 stage.close();
@@ -109,7 +124,5 @@ public class EditActivityController implements Initializable {
 			
 		});
 		
-		type.setItems(FXCollections.observableArrayList("Presentation", "Group Work", "Discussion", "Break"));
 	}
-
 }
