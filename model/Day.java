@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import javafx.collections.FXCollections;
-
 public class Day extends Observable {
 	 
 	/**
@@ -46,11 +44,13 @@ public class Day extends Observable {
 	
 	public void removeActivity(Activity a){
 		activities.remove(a);
+		setChanged();
 		notifyObservers("ActivityRemoved");
 	}
 	
 	public void addActivity(Activity a){
 		activities.add(a);
+		setChanged();
 		notifyObservers("ActivityAdded");
 	}
 	

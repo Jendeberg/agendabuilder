@@ -65,6 +65,7 @@ public class Activity extends Observable implements Serializable{
 		notifyObservers("TypeChanged");
 	}
 	
+	@Override
 	public String toString(){
 		return name;
 	}

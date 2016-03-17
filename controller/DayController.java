@@ -8,9 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -23,9 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
@@ -73,7 +69,7 @@ public class DayController implements Initializable, Observer {
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
 	@FXML public void updateAct(MouseEvent arg0){
 		Activity activity = list.getSelectionModel().getSelectedItem();
-		new EditActivity(model, activity, 1);
+		new EditActivity(model, activity, day);
 	}
 
 	public void setDay(Day d) {
@@ -180,11 +176,15 @@ public class DayController implements Initializable, Observer {
 									break;
 								}
 							}
-						}
+						}else{
+		                	setText(null);
+		                	getStyleClass().removeAll(getStyleClass());
+		                }
 					}
 				};
 				cell.setOnDragDetected(new EventHandler<MouseEvent>() {
-				    public void handle(MouseEvent event) {
+				    @Override
+					public void handle(MouseEvent event) {
 				        /* drag was detected, start a drag-and-drop gesture*/
 				        /* allow any transfer mode */
 				        Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
@@ -200,13 +200,15 @@ public class DayController implements Initializable, Observer {
 				});
 		        
 		        cell.setOnDragDone(new EventHandler<DragEvent>() {
-		            public void handle(DragEvent event) {
+		            @Override
+					public void handle(DragEvent event) {
 
 		                event.consume();
 		            }
 		        });
 		        
 		        cell.setOnDragDropped(new EventHandler<DragEvent>() {
+					@Override
 					public void handle(DragEvent event) {
 						/* data dropped */
 						/* if there is a string data on dragboard, read it and use it */
@@ -256,6 +258,7 @@ public class DayController implements Initializable, Observer {
 		    }
 		});
 		list.setOnDragOver(new EventHandler<DragEvent>() {
+			@Override
 			public void handle(DragEvent event) {
 				if (event.getGestureSource() != list && event.getDragboard().hasString()) {
 					event.acceptTransferModes(TransferMode.ANY);
@@ -265,6 +268,7 @@ public class DayController implements Initializable, Observer {
 			}
 		});
 		list.setOnDragEntered(new EventHandler<DragEvent>() {
+			@Override
 			public void handle(DragEvent event) {
 				/* the drag-and-drop gesture entered the target */
 				/* show to the user that it is an actual gesture target */
@@ -276,6 +280,7 @@ public class DayController implements Initializable, Observer {
 			}
 		});
 		list.setOnDragExited(new EventHandler<DragEvent>() {
+			@Override
 			public void handle(DragEvent event) {
 				/* mouse moved away, remove the graphical cues */
 				list.setCursor(Cursor.DEFAULT);
@@ -284,6 +289,7 @@ public class DayController implements Initializable, Observer {
 			}
 		});
 		list.setOnDragDropped(new EventHandler<DragEvent>() {
+			@Override
 			public void handle(DragEvent event) {
 				/* data dropped */
 				/* if there is a string data on dragboard, read it and use it */

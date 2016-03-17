@@ -2,15 +2,12 @@ package se.kth.csc.iprog.agendabuilder.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -68,7 +65,7 @@ public class StartController implements Initializable, Observer {
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
 	@FXML public void updateAct(MouseEvent arg0){
 		Activity activity = activityList.getSelectionModel().getSelectedItem();
-		new EditActivity(model, activity, 0);
+		new EditActivity(model, activity, null);
 	}
 
 	@Override
@@ -122,7 +119,8 @@ public class StartController implements Initializable, Observer {
 			            }
 			        };
 			        cell.setOnDragDetected(new EventHandler<MouseEvent>() {
-					    public void handle(MouseEvent event) {
+					    @Override
+						public void handle(MouseEvent event) {
 					        /* drag was detected, start a drag-and-drop gesture*/
 					        /* allow any transfer mode */
 					        Dragboard db = activityList.startDragAndDrop(TransferMode.ANY);
@@ -138,12 +136,14 @@ public class StartController implements Initializable, Observer {
 					});
 			        
 			        cell.setOnDragDone(new EventHandler<DragEvent>() {
-			            public void handle(DragEvent event) {
+			            @Override
+						public void handle(DragEvent event) {
 			                event.consume();
 			            }
 			        });
 			        
 			        cell.setOnDragDropped(new EventHandler<DragEvent>() {
+						@Override
 						public void handle(DragEvent event) {
 							/* data dropped */
 							/* if there is a string data on dragboard, read it and use it */

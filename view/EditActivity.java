@@ -1,18 +1,12 @@
 package se.kth.csc.iprog.agendabuilder.view;
 
 import java.io.IOException;
-import java.util.*;
-import javax.swing.*;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import se.kth.csc.iprog.agendabuilder.controller.AddActivityButtonController;
 import se.kth.csc.iprog.agendabuilder.controller.EditActivityController;
-import se.kth.csc.iprog.agendabuilder.controller.StartController;
 import se.kth.csc.iprog.agendabuilder.model.*;
-import se.kth.csc.iprog.agendabuilder.util.*;
 
 /**
  * The window to add an activity from.
@@ -24,13 +18,13 @@ public class EditActivity{
 	private AnchorPane layout;
 	private AgendaModel model;
 	private Activity activity;
-	private int choice;
+	private Day day;
 	
-	public EditActivity(AgendaModel model, Activity activity, int choice){
+	public EditActivity(AgendaModel model, Activity activity, Day day){
 		stage = new Stage();
 		stage.setTitle("Edit Activity");
 		this.model = model;
-		this.choice = choice;
+		this.day = day;
 		this.activity = activity;
 		initLayout();
 
@@ -43,7 +37,8 @@ public class EditActivity{
 	        layout = (AnchorPane) loader.load();
 	        EditActivityController controller = loader.<EditActivityController>getController();
 	        controller.setModel(model);
-	        controller.setActivity(activity, choice);
+	        controller.setDay(day);
+	        controller.setActivity(activity);
 	        
 	        // Show the scene containing the root layout.
 	        Scene scene = new Scene(layout);

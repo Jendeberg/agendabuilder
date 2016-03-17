@@ -3,7 +3,6 @@
 
 package se.kth.csc.iprog.agendabuilder.view;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
