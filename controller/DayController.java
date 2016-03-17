@@ -30,6 +30,7 @@ import javafx.util.Callback;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 import se.kth.csc.iprog.agendabuilder.model.Day;
+import se.kth.csc.iprog.agendabuilder.view.EditActivity;
 
 public class DayController implements Initializable, Observer {
 	private Day day;
@@ -67,6 +68,12 @@ public class DayController implements Initializable, Observer {
 		} else if (s.equals("ActivityAdded") || s.equals("ActivityRemoved") || s.equals("ActivityMoved")){
 			updateActivities();
 		}
+	}
+	
+	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
+	@FXML public void updateAct(MouseEvent arg0){
+		Activity activity = list.getSelectionModel().getSelectedItem();
+		new EditActivity(model, activity, 1);
 	}
 
 	public void setDay(Day d) {

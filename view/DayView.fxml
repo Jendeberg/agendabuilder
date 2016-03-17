@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="257.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.kth.csc.iprog.agendabuilder.controller.DayController">
    <children>
-      <ListView fx:id="list" layoutX="29.0" layoutY="144.0" prefHeight="366.0" prefWidth="200.0" />
+      <ListView fx:id="list" layoutX="29.0" layoutY="144.0" prefHeight="366.0" prefWidth="200.0" onMouseClicked="#updateAct" />
       <Label layoutX="29.0" layoutY="20.0" prefHeight="17.0" prefWidth="68.0" text="Start Time:" />
       <Label layoutX="29.0" layoutY="53.0" prefHeight="17.0" prefWidth="68.0" text="End Time:" />
       <Label fx:id="colorLabel" layoutX="178.0" layoutY="20.0" prefHeight="100.0" prefWidth="30.0" />

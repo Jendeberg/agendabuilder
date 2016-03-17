@@ -26,6 +26,7 @@ import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 public class EditActivityController implements Initializable {
 	private AgendaModel model;
 	private Activity activity;
+	private int choice;
 		
 	@FXML
 	private Button save;
@@ -55,10 +56,16 @@ public class EditActivityController implements Initializable {
 		this.model = model;
 	}
 	
-	public void setActivity(Activity activity){
+	public void setActivity(Activity activity, int choice){
 		this.activity = activity;
-		updateWindow();
+		if(choice == 0){
+			updateWindow();
+		}
+		else{
+			updateInLine();
+		}
 	}
+	
 
 	/**
 	 * Checks where the ActionEvent comes from and then decides what to do with
@@ -78,12 +85,10 @@ public class EditActivityController implements Initializable {
 	}
 
 	public void updateWindow(){
-		System.out.println(activity.getDescription());
 		length.setText(Integer.toString(activity.getLength()));
 		desc.setText(activity.getDescription());
 		name.setText(activity.getName());
 		type.getSelectionModel().select(activity.getType());
-		
 		
 		save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -125,4 +130,58 @@ public class EditActivityController implements Initializable {
 		});
 		
 	}
+	
+	public void updateInLine(){
+		length.setText(Integer.toString(activity.getLength()));
+		desc.setText(activity.getDescription());
+		name.setText(activity.getName());
+		type.getSelectionModel().select(activity.getType());
+		
+		save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	int typeVal = 0;
+            	switch(type.getValue()){
+            		case "Presentation":typeVal=1;
+            		break;
+            		case "Group Work":typeVal=2;
+            		break;
+            		case "Discussion":typeVal=3;
+            		break;
+            		case "Break":typeVal=4;
+            		break;
+            	}
+            	for(int i = 0; i<model.days.size(); i++){
+            		for(Activity act : model.days.get(i).activities){
+            			if(act.equals(activity)){
+                			model.days.get(i).removeActivity(act);
+                			model.days.get(i).addActivity(new Activity(name.getText(), desc.getText(), Integer.parseInt(length.getText()), typeVal));
+            			}
+					}		
+            	}
+            	Node  source = (Node)  event.getSource(); 
+                Stage stage  = (Stage) source.getScene().getWindow();
+                stage.close();
+            }
+        });
+		cancel.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+            	for(int i = 0; i<model.days.size(); i++){
+            		for(Activity act : model.days.get(i).activities){
+            			if(act.equals(activity)){
+                			model.days.get(i).removeActivity(act);
+            			}
+					}		
+            	}
+            	Node  source = (Node)  event.getSource(); 
+                Stage stage  = (Stage) source.getScene().getWindow();
+                stage.close();
+			}
+			
+		});
+		
+	}
+
 }

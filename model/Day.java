@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javafx.collections.FXCollections;
+
 public class Day extends Observable {
 	 
 	/**
@@ -42,6 +44,15 @@ public class Day extends Observable {
 		return getStart() + getTotalLength();
 	}
 	
+	public void removeActivity(Activity a){
+		activities.remove(a);
+		notifyObservers("ActivityRemoved");
+	}
+	
+	public void addActivity(Activity a){
+		activities.add(a);
+		notifyObservers("ActivityAdded");
+	}
 	
 	/**
 	 * returns the length (in minutes) of activities of certain type

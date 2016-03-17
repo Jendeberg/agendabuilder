@@ -24,11 +24,13 @@ public class EditActivity{
 	private AnchorPane layout;
 	private AgendaModel model;
 	private Activity activity;
+	private int choice;
 	
-	public EditActivity(AgendaModel model, Activity activity){
+	public EditActivity(AgendaModel model, Activity activity, int choice){
 		stage = new Stage();
 		stage.setTitle("Edit Activity");
 		this.model = model;
+		this.choice = choice;
 		this.activity = activity;
 		initLayout();
 
@@ -41,7 +43,7 @@ public class EditActivity{
 	        layout = (AnchorPane) loader.load();
 	        EditActivityController controller = loader.<EditActivityController>getController();
 	        controller.setModel(model);
-	        controller.setActivity(activity);
+	        controller.setActivity(activity, choice);
 	        
 	        // Show the scene containing the root layout.
 	        Scene scene = new Scene(layout);

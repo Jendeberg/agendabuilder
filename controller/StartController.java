@@ -68,7 +68,7 @@ public class StartController implements Initializable, Observer {
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
 	@FXML public void updateAct(MouseEvent arg0){
 		Activity activity = activityList.getSelectionModel().getSelectedItem();
-		new EditActivity(model, activity);
+		new EditActivity(model, activity, 0);
 	}
 
 	@Override
