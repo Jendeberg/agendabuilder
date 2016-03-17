@@ -134,7 +134,28 @@ public class DayController implements Initializable, Observer {
 						super.updateItem(act, empty);
 						if (act != null) {
 							if (act != null) {
-								setText(act.toString());
+								int startTime = 0;
+								for(Activity activity : day.activities){
+									if(act.equals(activity)){
+										break;
+									}
+									startTime += activity.getLength();
+								}
+								int hour = startTime/60 + day.getStart()/60;
+								int min = startTime%60 + day.getStart()%60;
+								String time = null;
+								if(hour<10){
+									time = "0"+hour+ ":";
+								}else{
+									time = hour + ":";
+								}
+								if(min < 10){
+									time += "0" + min;
+								}else{
+									time += min;
+								}
+								//Find the time until activity.
+								setText(time +" | " + act.toString());
 								switch (act.getType()) {
 								case Activity.PRESENTATION:
 									getStyleClass().add("pres");
