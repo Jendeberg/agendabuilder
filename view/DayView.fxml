@@ -20,5 +20,6 @@
       <Pane fx:id="discPercent" layoutX="178.0" layoutY="41.0" prefHeight="25.0" prefWidth="47.0" styleClass="disc" />
       <Pane fx:id="groupWorkPercent" layoutX="178.0" layoutY="66.0" prefHeight="25.0" prefWidth="47.0" styleClass="gw" />
       <Pane fx:id="breakPercent" layoutX="178.0" layoutY="90.0" prefHeight="25.0" prefWidth="47.0" styleClass="brk" />
+      <Pane fx:id="line" layoutX="175.0" layoutY="90.0" prefHeight="2.0" prefWidth="53.0" styleClass="line" />
    </children>
 </AnchorPane>

@@ -44,3 +44,7 @@
 .brk{
 	-fx-background-color: #9999cc;
 }
+
+.line{
+	-fx-background-color: #ff0000;
+}

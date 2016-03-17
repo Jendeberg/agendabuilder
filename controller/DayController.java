@@ -55,6 +55,8 @@ public class DayController implements Initializable, Observer {
 	private Pane groupWorkPercent;
 	@FXML
 	private Pane breakPercent;
+	@FXML
+	private Pane line;
 	
 	
 	@Override
@@ -317,6 +319,7 @@ public class DayController implements Initializable, Observer {
 			discPercent.setPrefHeight(0.0);
 			groupWorkPercent.setPrefHeight(0.0);
 			breakPercent.setPrefHeight(0.0);
+			line.setPrefHeight(0);
 			return;
 		}
 		
@@ -331,5 +334,7 @@ public class DayController implements Initializable, Observer {
 
 		breakPercent.setPrefHeight((day.getLengthByType(Activity.BREAK)*100/day.getTotalLength()));
 		breakPercent.setLayoutY(16.0+presPercent.getPrefHeight()+discPercent.getPrefHeight()+groupWorkPercent.getPrefHeight());
+		
+		line.setPrefHeight(2);
 	}
 }
