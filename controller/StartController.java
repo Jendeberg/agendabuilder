@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -96,7 +97,11 @@ public class StartController implements Initializable, Observer {
 			                super.updateItem(act,empty);
 			                if(act!=null){   
 			                	if (act != null) {
-									setText(act.toString());
+			                		String hour = "" + act.getLength()/60;
+			                		if(act.getLength()/60 < 10){ hour = "0"+hour; }
+			                		String min = "" + act.getLength()%60;
+			                		if(act.getLength()%60 < 10){ min = "0"+min; }
+									setText(hour + ":" + min + " | " +act.toString());
 									switch (act.getType()) {
 									case Activity.PRESENTATION:
 										getStyleClass().add("pres");
@@ -141,40 +146,71 @@ public class StartController implements Initializable, Observer {
 			                event.consume();
 			            }
 			        });
-			        
-			        cell.setOnDragDropped(new EventHandler<DragEvent>() {
-						@Override
-						public void handle(DragEvent event) {
-							/* data dropped */
-							/* if there is a string data on dragboard, read it and use it */
-							Dragboard db = event.getDragboard();
-							boolean success = false;
-							if(db.hasString() && db.getString().equals("Day")){
-								Activity act = (Activity) db.getContent(StartController.ACTIVITY_FORMAT);
-								Day oldDay = null;
-								int oldIndex = 0;
-								for(Day d : model.days){
-									for(Activity a : d.activities){
-										if(a.getName().equals(act.getName())){
-											oldDay = d;
-											oldIndex = d.activities.indexOf(a);
-											break;
-										}
-									}
-								}
-								if(oldDay != null){
-									model.moveActivity(oldDay, oldIndex, null, 0);
-									success = true;
-								}
-							}
-							event.setDropCompleted(success);
-
-							event.consume();
-						}
-					});
-			        
 			        return cell;
 			    }
+		});
+		
+		
+		activityList.setOnDragOver(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				if (event.getGestureSource() != activityList && event.getDragboard().hasString()) {
+					event.acceptTransferModes(TransferMode.ANY);
+				}
+
+				event.consume();
+			}
+		});
+		activityList.setOnDragEntered(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				/* the drag-and-drop gesture entered the target */
+				/* show to the user that it is an actual gesture target */
+				if (event.getGestureSource() != activityList && event.getDragboard().hasString()) {
+					activityList.setCursor(Cursor.CLOSED_HAND);
+				}
+
+				event.consume();
+			}
+		});
+		activityList.setOnDragExited(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				/* mouse moved away, remove the graphical cues */
+				activityList.setCursor(Cursor.DEFAULT);
+
+				event.consume();
+			}
+		});
+		activityList.setOnDragDropped(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				/* data dropped */
+				/* if there is a string data on dragboard, read it and use it */
+				Dragboard db = event.getDragboard();
+				boolean success = false;
+				if(db.hasString() && db.getString().equals("Day")){
+					Activity act = (Activity) db.getContent(StartController.ACTIVITY_FORMAT);
+					Day oldDay = null;
+					int oldIndex = 0;
+					for(Day d : model.days){
+						for(Activity a : d.activities){
+							if(a.getName().equals(act.getName())){
+								oldDay = d;
+								oldIndex = d.activities.indexOf(a);
+								break;
+							}
+						}
+					}
+					if(oldDay != null){
+						model.moveActivity(oldDay, oldIndex, null, model.parkedActivites.size());
+						success = true;
+					}
+				}
+				event.setDropCompleted(success);
+
+				event.consume();
+			}
 		});
 	}
 
