@@ -61,9 +61,8 @@ public class DayController implements Initializable, Observer {
 		String s = (String) arg;
 		if (s.equals("StartChanged")) {
 			updateTime();
-		} else if (s.equals("ActivityAdded") || s.equals("ActivityRemoved") || s.equals("ActivityMoved")){
-			updateActivities();
 		}
+		updateActivities();
 	}
 	
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
@@ -86,6 +85,7 @@ public class DayController implements Initializable, Observer {
 	}
 
 	private void updateActivities() {
+		list.setItems(null);
 		list.setItems(FXCollections.observableArrayList(day.activities));
 		updateTime();
 		updateColorLabel();
