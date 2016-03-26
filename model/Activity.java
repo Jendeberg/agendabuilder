@@ -15,7 +15,6 @@ public class Activity extends Observable implements Serializable{
 	public static final int GROUP_WORK = 2;
 	public static final int DISCUSSION = 3;
 	public static final int BREAK = 4;
-	public boolean editing;
 	
 
 	String name;

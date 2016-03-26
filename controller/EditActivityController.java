@@ -31,7 +31,7 @@ public class EditActivityController implements Initializable {
 	@FXML
 	private Button save;
 	@FXML
-	private Button cancel;
+	private Button delete;
 	@FXML
 	private TextField name;
 	@FXML
@@ -126,7 +126,7 @@ public class EditActivityController implements Initializable {
 				stage.close();
 			}
 		});
-		cancel.setOnAction(new EventHandler<ActionEvent>() {
+		delete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -142,10 +142,7 @@ public class EditActivityController implements Initializable {
 				Node source = (Node) event.getSource();
 				Stage stage = (Stage) source.getScene().getWindow();
 				stage.close();
-				activity.editing = false;
 			}
-
 		});
-
 	}
 }

@@ -15,7 +15,7 @@
    <children>
 	  <TextField fx:id="name" layoutX="23.0" layoutY="70.0" prefHeight="49.0" prefWidth="407.0" promptText="Name" />
       <TextField fx:id="length" layoutX="23.0" layoutY="163.0" prefHeight="49.0" prefWidth="407.0" promptText="Length" />
-      <Button fx:id="cancel" layoutX="239.0" layoutY="531.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="error-btn" text="Delete" />
+      <Button fx:id="delete" layoutX="239.0" layoutY="531.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="error-btn" text="Delete" />
       <Button fx:id="save" layoutX="26.0" layoutY="531.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="194.0" styleClass="success-btn" text="Save" />
       <ChoiceBox fx:id="type" layoutX="23.0" layoutY="250.0" prefHeight="49.0" prefWidth="407.0" />
       <TextField fx:id="desc" layoutX="23.0" layoutY="350.0" prefHeight="167.0" prefWidth="407.0" promptText="Description" />
