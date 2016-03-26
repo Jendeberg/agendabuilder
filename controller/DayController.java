@@ -69,7 +69,10 @@ public class DayController implements Initializable, Observer {
 	//CHECKS WHICH ITEM HAS BEEN CLICKED - NEEDS TO REDIRECT TO EDITOR.
 	@FXML public void updateAct(MouseEvent arg0){
 		Activity activity = list.getSelectionModel().getSelectedItem();
-		new EditActivity(model, activity, day);
+		if(!(activity == null) || !activity.editing ){
+			activity.editing = true;
+			new EditActivity(model, activity, day);
+		}
 	}
 
 	public void setDay(Day d) {
