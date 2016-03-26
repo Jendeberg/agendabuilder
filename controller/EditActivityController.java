@@ -130,10 +130,15 @@ public class EditActivityController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				for (int i = 0; i < model.parkedActivites.size(); i++)
-					if (model.parkedActivites.get(i).equals(activity)) {
-						model.removeParkedActivity(i);
-					}
+				if (day == null) {
+					for (int i = 0; i < model.parkedActivites.size(); i++)
+						if (model.parkedActivites.get(i).equals(activity)) {
+							model.removeParkedActivity(i);
+						}
+				} else {
+					day.removeActivity(activity);
+
+				}
 				Node source = (Node) event.getSource();
 				Stage stage = (Stage) source.getScene().getWindow();
 				stage.close();
