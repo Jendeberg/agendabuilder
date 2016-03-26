@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
@@ -37,6 +38,8 @@ public class AddActivityButtonController implements Initializable {
 	private TextField desc;
 	@FXML
 	private ChoiceBox<String> type;
+	@FXML
+	private Label error_label;
 
 	/**
 	 * Constructor, starts the actionlistener on the buttons.
@@ -68,6 +71,13 @@ public class AddActivityButtonController implements Initializable {
 		save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                try{
+                	Integer.parseInt(length.getText());
+                }
+                catch(Exception e){
+                	error_label.setText("Please assign length an integer value.");
+                	return;
+                }
             	int typeVal = 0;
             	switch(type.getValue()){
             		case "Presentation":typeVal=1;
