@@ -78,6 +78,14 @@ public class AddActivityButtonController implements Initializable {
                 	error_label.setText("Please assign length an integer value.");
                 	return;
                 }
+                if(name.getText().trim().isEmpty()) {
+                	error_label.setText("One or more fields are empty.");
+                	return;
+                }
+                if(type.getValue() == null){
+                	error_label.setText("One or more fields are empty.");
+                	return;
+                }
             	int typeVal = 0;
             	switch(type.getValue()){
             		case "Presentation":typeVal=1;
@@ -87,6 +95,7 @@ public class AddActivityButtonController implements Initializable {
             		case "Discussion":typeVal=3;
             		break;
             		case "Break":typeVal=4;
+            		
             		break;
             	}
             	model.addParkedActivity(new Activity(name.getText(), desc.getText(), Integer.parseInt(length.getText()), typeVal));

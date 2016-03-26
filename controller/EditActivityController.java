@@ -102,6 +102,14 @@ public class EditActivityController implements Initializable {
                 	error_label.setText("Please assign length an integer value.");
                 	return;
                 }
+                if(name.getText().trim().isEmpty()) {
+                	error_label.setText("One or more fields are empty.");
+                	return;
+                }
+                if(type.getValue() == null){
+                	error_label.setText("One or more fields are empty.");
+                	return;
+                }
 				int typeVal = 0;
 				switch (type.getValue()) {
 				case "Presentation":
