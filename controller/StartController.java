@@ -128,6 +128,8 @@ public class StartController implements Initializable, Observer {
 			        cell.setOnDragDetected(new EventHandler<MouseEvent>() {
 					    @Override
 						public void handle(MouseEvent event) {
+					    	if(cell.getItem() == null)
+					    		return;
 					        /* drag was detected, start a drag-and-drop gesture*/
 					        /* allow any transfer mode */
 					        Dragboard db = activityList.startDragAndDrop(TransferMode.ANY);
