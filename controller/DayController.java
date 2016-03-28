@@ -117,12 +117,22 @@ public class DayController implements Initializable, Observer {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
 					String[] slist = startTime.getText().split(":");
-					int hour = Integer.parseInt(slist[0]);
-					int min = Integer.parseInt(slist[1]);
-					if (hour < 24) {
-						day.setStart(hour * 60 + min);
+					if(slist.length != 2){ 
+						return;
+					}else if(slist[0].length() > 3 || slist[0].length() == 0 || slist[1].length() > 3 || slist[1].length() == 0){
+						return;
 					}
-					updateTime();
+					try{
+						int hour = Integer.parseInt(slist[0]);
+						int min = Integer.parseInt(slist[1]);
+						if (hour < 24) {
+							day.setStart(hour * 60 + min);
+						}
+					}catch(NumberFormatException nfe){
+						return;
+					}finally{
+						updateTime();
+					}
 				}
 			}
 		});
