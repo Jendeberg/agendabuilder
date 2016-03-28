@@ -159,7 +159,7 @@ public class DayController implements Initializable, Observer {
 									}
 									startTime += activity.getLength();
 								}
-								int hour = startTime/60 + day.getStart()/60;
+								int hour = (startTime/60 + day.getStart()/60) % 24;
 								int min = startTime%60 + day.getStart()%60;
 								String time = null;
 								if(hour<10){
