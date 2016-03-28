@@ -96,9 +96,10 @@ public class DayController implements Initializable, Observer {
 		if ((day.getStart() % 60) < 10)
 			seperator += "0";
 		startTime.setPromptText(day.getStart() / 60 + seperator + (day.getStart() % 60));
-		if (!((day.getEnd() % 60) < 10))
-			seperator = ":";
-		endTime.setText((day.getEnd() / 60) + seperator + (day.getEnd() % 60));
+		seperator = ":";
+		if ((day.getEnd() % 60) < 10)
+			seperator += "0";
+		endTime.setText(((day.getEnd() / 60) % 24) + seperator + (day.getEnd() % 60));
 		if ((day.getTotalLength() % 60) < 10) {
 			seperator = ":0";
 		} else {
